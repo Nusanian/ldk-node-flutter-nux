@@ -1,0 +1,37 @@
+[package]
+name = "ldk_node"
+version = "0.7.0"
+edition = "2021"
+
+# This is needed to suppress the frb_expand cfg warning
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }
+
+[lib]
+crate-type = ["staticlib", "cdylib"]
+
+
+[build-dependencies]
+anyhow = "1.0.68"
+[dependencies]
+flutter_rust_bridge = "=2.11.1"
+anyhow = { version = "1.0.71"}
+# NUX-SPIKE: bumped from =0.7.0 to our patched 0.7.1 tree (FFI Currency variants).
+ldk-node = { version = "=0.7.1"  }
+# ldk-node = {git = 'https://github.com/lightningdevkit/ldk-node.git', rev = "0b999773fa54a3c54f007bebccdceb1fa67247fe"}
+
+# NUX-SPIKE: route the whole graph at our local forks (X11 rust-bitcoin,
+# Currency-patched lightning-invoice, FFI-patched ldk-node).
+# Paths are relative to this file (rust/Cargo.toml).
+[patch.crates-io]
+ldk-node = { path = "../../ldk-node" }
+bitcoin = { path = "../../rust-bitcoin/bitcoin" }
+lightning-invoice = { path = "../../rust-lightning/lightning-invoice" }
+
+
+[profile.release]
+opt-level = 3     # Optimize for size.
+lto = true          # Enable Link Time Optimization
+codegen-units = 1   # Reduce number of codegen units to increase optimizations.
+panic = 'abort'
+

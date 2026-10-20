@@ -1,0 +1,7 @@
+cargo:
+  release:
+    toolchain: stable
+
+precompiled_binaries:
+  url_prefix: https://github.com/LtbLightning/ldk-node-flutter/releases/download/precompiled_
+  public_key: 51bfe47f3ac3381948217bfd0ab75517d5cb184a4a8c520d784e64f7980b9297
