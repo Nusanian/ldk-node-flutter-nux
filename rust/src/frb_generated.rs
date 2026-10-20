@@ -662,6 +662,7 @@ impl CstDecode<crate::api::types::BalanceSource> for i32 {
 2 => crate::api::types::Network::Signet,
 3 => crate::api::types::Network::Regtest,
 4 => crate::api::types::Network::Nusacoin,
+5 => crate::api::types::Network::NusacoinTestnet,
             _ => unreachable!("Invalid variant for Network: {}", self),
         }
             }
@@ -1534,6 +1535,7 @@ return crate::api::types::MaxTotalRoutingFeeLimit::FeeCap{amount_msat: var_amoun
 2 => crate::api::types::Network::Signet,
 3 => crate::api::types::Network::Regtest,
 4 => crate::api::types::Network::Nusacoin,
+5 => crate::api::types::Network::NusacoinTestnet,
             _ => unreachable!("Invalid variant for Network: {}", inner),
         };}
                 }
@@ -3210,6 +3212,7 @@ Self::Testnet => 1.into_dart(),
 Self::Signet => 2.into_dart(),
 Self::Regtest => 3.into_dart(),
 Self::Nusacoin => 4.into_dart(),
+Self::NusacoinTestnet => 5.into_dart(),
                     _ => unreachable!(),
                 }
                 }
@@ -4443,6 +4446,7 @@ crate::api::types::Network::Testnet => { 1 }
 crate::api::types::Network::Signet => { 2 }
 crate::api::types::Network::Regtest => { 3 }
 crate::api::types::Network::Nusacoin => { 4 }
+crate::api::types::Network::NusacoinTestnet => { 5 }
  _ => { unimplemented!(""); }}, serializer);}
                 }
                 

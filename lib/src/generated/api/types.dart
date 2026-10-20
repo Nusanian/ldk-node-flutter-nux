@@ -1481,6 +1481,10 @@ enum Network {
   ///Nusacoin mainnet (X11 PoW)
   ///
   nusacoin,
+
+  ///Nusacoin testnet (X11 PoW)
+  ///
+  nusacoinTestnet,
   ;
 }
 

@@ -1456,6 +1456,9 @@ pub enum Network {
     ///Nusacoin mainnet (X11 PoW)
     ///
     Nusacoin,
+    ///Nusacoin testnet (X11 PoW)
+    ///
+    NusacoinTestnet,
 }
 
 impl From<Network> for ldk_node::bitcoin::Network {
@@ -1466,6 +1469,7 @@ impl From<Network> for ldk_node::bitcoin::Network {
             Network::Signet => ldk_node::bitcoin::Network::Signet,
             Network::Regtest => ldk_node::bitcoin::Network::Regtest,
             Network::Nusacoin => ldk_node::bitcoin::Network::Nusacoin,
+            Network::NusacoinTestnet => ldk_node::bitcoin::Network::NusacoinTestnet,
         }
     }
 }
@@ -1477,6 +1481,7 @@ impl From<ldk_node::bitcoin::Network> for Network {
             ldk_node::bitcoin::Network::Signet => Network::Signet,
             ldk_node::bitcoin::Network::Regtest => Network::Regtest,
             ldk_node::bitcoin::Network::Nusacoin => Network::Nusacoin,
+            ldk_node::bitcoin::Network::NusacoinTestnet => Network::NusacoinTestnet,
             _ => Network::Bitcoin,
         }
     }
