@@ -26,6 +26,8 @@ ldk-node = { version = "=0.7.1"  }
 [patch.crates-io]
 ldk-node = { path = "../../ldk-node" }
 bitcoin = { path = "../../rust-bitcoin/bitcoin" }
+lightning = { path = "../../rust-lightning/lightning" }
+lightning-types = { path = "../../rust-lightning/lightning-types" }
 lightning-invoice = { path = "../../rust-lightning/lightning-invoice" }
 
 

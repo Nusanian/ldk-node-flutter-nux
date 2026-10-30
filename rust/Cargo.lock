@@ -1247,7 +1247,7 @@ dependencies = [
  "lightning-block-sync",
  "lightning-invoice",
  "lightning-liquidity",
- "lightning-macros",
+ "lightning-macros 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lightning-net-tokio",
  "lightning-persister",
  "lightning-rapid-gossip-sync",
@@ -1311,8 +1311,6 @@ dependencies = [
 [[package]]
 name = "lightning"
 version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4342d07db2b3fe7c9a73849e94d012ebcfa3588c25097daf0b5ff2857c04e0e1"
 dependencies = [
  "bech32",
  "bitcoin",
@@ -1320,9 +1318,10 @@ dependencies = [
  "hashbrown 0.13.2",
  "libm",
  "lightning-invoice",
- "lightning-macros",
+ "lightning-macros 0.2.0",
  "lightning-types",
- "possiblyrandom",
+ "musig2",
+ "possiblyrandom 0.2.0",
 ]
 
 [[package]]
@@ -1337,7 +1336,7 @@ dependencies = [
  "lightning",
  "lightning-liquidity",
  "lightning-rapid-gossip-sync",
- "possiblyrandom",
+ "possiblyrandom 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -1373,10 +1372,19 @@ dependencies = [
  "chrono",
  "lightning",
  "lightning-invoice",
- "lightning-macros",
+ "lightning-macros 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "lightning-types",
  "serde",
  "serde_json",
+]
+
+[[package]]
+name = "lightning-macros"
+version = "0.2.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.106",
 ]
 
 [[package]]
@@ -1436,14 +1444,12 @@ dependencies = [
  "esplora-client",
  "futures",
  "lightning",
- "lightning-macros",
+ "lightning-macros 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "lightning-types"
 version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5681708d3075bdff3a1b4daa400590e2703e7871bdc14e94ee7334fb6314ae40"
 dependencies = [
  "bitcoin",
 ]
@@ -1546,6 +1552,14 @@ name = "multimap"
 version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e5ce46fe64a9d73be07dcbe690a38ce1b293be448fd8ce1e6c1b8062c9f72c6a"
+
+[[package]]
+name = "musig2"
+version = "0.1.0"
+source = "git+https://github.com/arik-so/rust-musig2?rev=6f95a05718cbb44d8fe3fa6021aea8117aa38d50#6f95a05718cbb44d8fe3fa6021aea8117aa38d50"
+dependencies = [
+ "bitcoin",
+]
 
 [[package]]
 name = "nom"
@@ -1666,6 +1680,13 @@ name = "portable-atomic"
 version = "1.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f84267b20a16ea918e43c6a88433c2d54fa145c92a811b5b047ccbe153674483"
+
+[[package]]
+name = "possiblyrandom"
+version = "0.2.0"
+dependencies = [
+ "getrandom 0.2.16",
+]
 
 [[package]]
 name = "possiblyrandom"
