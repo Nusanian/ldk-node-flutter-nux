@@ -1435,16 +1435,14 @@ dependencies = [
 
 [[package]]
 name = "lightning-transaction-sync"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f16c2cc74a73e29295bb5c0de61f4a0e6fe7151562ebdd48ee9935fcaa59bd8"
+version = "0.2.7"
 dependencies = [
  "bitcoin",
  "electrum-client",
  "esplora-client",
  "futures",
  "lightning",
- "lightning-macros 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
+ "lightning-macros 0.2.0",
 ]
 
 [[package]]
@@ -2148,7 +2146,7 @@ version = "0.29.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9465315bc9d4566e1724f0fffcbcc446268cb522e60f9a27bcded6b19c108113"
 dependencies = [
- "bitcoin_hashes 0.14.0",
+ "bitcoin_hashes 0.13.0",
  "rand 0.8.5",
  "secp256k1-sys",
  "serde",

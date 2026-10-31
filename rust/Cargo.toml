@@ -29,6 +29,13 @@ bitcoin = { path = "../../rust-bitcoin/bitcoin" }
 lightning = { path = "../../rust-lightning/lightning" }
 lightning-types = { path = "../../rust-lightning/lightning-types" }
 lightning-invoice = { path = "../../rust-lightning/lightning-invoice" }
+# lightning-transaction-sync must be patched here, at the workspace root.
+# Cargo only honors [patch] tables from the root manifest of the build;
+# the same entry in ldk-node's own Cargo.toml applies to ldk-node
+# standalone builds but is ignored when this crate is the root, which
+# previously let the crates.io 0.2.0 release -- without the sync-loop
+# fix -- slip into app builds while the fork tree (0.2.7) stood unused.
+lightning-transaction-sync = { path = "../../rust-lightning/lightning-transaction-sync" }
 
 
 [profile.release]
