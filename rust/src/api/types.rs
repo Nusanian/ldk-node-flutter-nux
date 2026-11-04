@@ -1721,6 +1721,7 @@ impl TryFrom<Config> for ldk_node::config::Config {
             anchor_channels_config,
             node_alias: value.node_alias.map(|e| e.into()),
             route_parameters: value.route_parameters.map(|e| e.into()),
+            tolerate_offline_start: value.tolerate_offline_start,
             announcement_addresses: if let Some(vec_socket_addr) = value.announcement_addresses {
                 let addr_vec: Result<
                     Vec<ldk_node::lightning::ln::msgs::SocketAddress>,
@@ -1757,6 +1758,7 @@ impl From<ldk_node::config::Config> for Config {
             probing_liquidity_limit_multiplier: value.probing_liquidity_limit_multiplier,
             anchor_channels_config: value.anchor_channels_config.map(|e| e.into()),
             route_parameters: value.route_parameters.map(|e| e.into()),
+            tolerate_offline_start: value.tolerate_offline_start,
             node_alias: value.node_alias.map(|e| e.into()),
             announcement_addresses: value.announcement_addresses.map(|vec_socket_addr| {
                 vec_socket_addr
@@ -1834,6 +1836,13 @@ pub struct Config {
     /// **Note:** If unset, default parameters will be used, and you will be able to override the
     /// parameters on a per-payment basis in the corresponding method calls.
     pub route_parameters: Option<RouteParametersConfig>,
+    #[frb(non_final)]
+    /// Whether to tolerate an unreachable chain data source when starting the node.
+    ///
+    /// When true, node start-up logs a warning and continues without chain
+    /// sync if the chain data source can't be reached (e.g. no network
+    /// connectivity), instead of failing. Defaults to false.
+    pub tolerate_offline_start: bool,
 }
 
 impl Default for AnchorChannelsConfig {
@@ -1859,6 +1868,7 @@ impl Default for Config {
             anchor_channels_config: Some(Default::default()),
             node_alias: None,
             route_parameters: None,
+            tolerate_offline_start: false,
         }
     }
 }

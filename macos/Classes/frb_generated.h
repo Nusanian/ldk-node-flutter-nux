@@ -121,6 +121,7 @@ typedef struct wire_cst_config {
   uint64_t probing_liquidity_limit_multiplier;
   struct wire_cst_anchor_channels_config *anchor_channels_config;
   struct wire_cst_route_parameters_config *route_parameters;
+  bool tolerate_offline_start;
 } wire_cst_config;
 
 typedef struct wire_cst_background_sync_config {

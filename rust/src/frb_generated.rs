@@ -25,8 +25,8 @@ clippy::needless_borrow
 
 // Section: imports
 
-use crate::api::builder::*;
-use crate::*;use flutter_rust_bridge::{Handler, IntoIntoDart};
+use crate::*;
+use crate::api::builder::*;use flutter_rust_bridge::{Handler, IntoIntoDart};
 use flutter_rust_bridge::for_generated::{Lockable, transform_result_dco, Lifetimeable};
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, WriteBytesExt, ReadBytesExt};
 
@@ -1024,7 +1024,8 @@ let mut var_trustedPeers0Conf = <Vec<crate::api::types::PublicKey>>::sse_decode(
 let mut var_probingLiquidityLimitMultiplier = <u64>::sse_decode(deserializer);
 let mut var_anchorChannelsConfig = <Option<crate::api::types::AnchorChannelsConfig>>::sse_decode(deserializer);
 let mut var_routeParameters = <Option<crate::api::types::RouteParametersConfig>>::sse_decode(deserializer);
-return crate::api::types::Config{storage_dir_path: var_storageDirPath, network: var_network, listening_addresses: var_listeningAddresses, announcement_addresses: var_announcementAddresses, node_alias: var_nodeAlias, trusted_peers_0conf: var_trustedPeers0Conf, probing_liquidity_limit_multiplier: var_probingLiquidityLimitMultiplier, anchor_channels_config: var_anchorChannelsConfig, route_parameters: var_routeParameters};}
+let mut var_tolerateOfflineStart = <bool>::sse_decode(deserializer);
+return crate::api::types::Config{storage_dir_path: var_storageDirPath, network: var_network, listening_addresses: var_listeningAddresses, announcement_addresses: var_announcementAddresses, node_alias: var_nodeAlias, trusted_peers_0conf: var_trustedPeers0Conf, probing_liquidity_limit_multiplier: var_probingLiquidityLimitMultiplier, anchor_channels_config: var_anchorChannelsConfig, route_parameters: var_routeParameters, tolerate_offline_start: var_tolerateOfflineStart};}
                 }
                 
                 impl SseDecode for crate::api::types::ConfirmationStatus {
@@ -2619,7 +2620,8 @@ self.node_alias.into_into_dart().into_dart(),
 self.trusted_peers_0conf.into_into_dart().into_dart(),
 self.probing_liquidity_limit_multiplier.into_into_dart().into_dart(),
 self.anchor_channels_config.into_into_dart().into_dart(),
-self.route_parameters.into_into_dart().into_dart()
+self.route_parameters.into_into_dart().into_dart(),
+self.tolerate_offline_start.into_into_dart().into_dart()
                 ].into_dart()
                 }
             }
@@ -3995,7 +3997,8 @@ crate::api::types::ClosureReason::HTLCsTimedOut => { <i32>::sse_encode(13, seria
 <Vec<crate::api::types::PublicKey>>::sse_encode(self.trusted_peers_0conf, serializer);
 <u64>::sse_encode(self.probing_liquidity_limit_multiplier, serializer);
 <Option<crate::api::types::AnchorChannelsConfig>>::sse_encode(self.anchor_channels_config, serializer);
-<Option<crate::api::types::RouteParametersConfig>>::sse_encode(self.route_parameters, serializer);}
+<Option<crate::api::types::RouteParametersConfig>>::sse_encode(self.route_parameters, serializer);
+<bool>::sse_encode(self.tolerate_offline_start, serializer);}
                 }
                 
                 impl SseEncode for crate::api::types::ConfirmationStatus {
@@ -5072,8 +5075,8 @@ crate::api::types::SocketAddress::Hostname{addr,port} => { <i32>::sse_encode(4, 
 
 // Section: imports
 
-use crate::api::builder::*;
-use crate::*;use flutter_rust_bridge::{Handler, IntoIntoDart};
+use crate::*;
+use crate::api::builder::*;use flutter_rust_bridge::{Handler, IntoIntoDart};
 use flutter_rust_bridge::for_generated::{Lockable, transform_result_dco, Lifetimeable};
 use flutter_rust_bridge::for_generated::byteorder::{NativeEndian, WriteBytesExt, ReadBytesExt};use super::*;
 
@@ -5634,7 +5637,7 @@ impl CstDecode<FfiBuilder> for usize {
         }impl CstDecode<crate::api::types::Config> for wire_cst_config {
             // Codec=Cst (C-struct based), see doc to use other codecs
             fn cst_decode(self) -> crate::api::types::Config {
-                crate::api::types::Config{storage_dir_path:  self.storage_dir_path.cst_decode(),network:  self.network.cst_decode(),listening_addresses:  self.listening_addresses.cst_decode(),announcement_addresses:  self.announcement_addresses.cst_decode(),node_alias:  self.node_alias.cst_decode(),trusted_peers_0conf:  self.trusted_peers_0conf.cst_decode(),probing_liquidity_limit_multiplier:  self.probing_liquidity_limit_multiplier.cst_decode(),anchor_channels_config:  self.anchor_channels_config.cst_decode(),route_parameters:  self.route_parameters.cst_decode()}
+                crate::api::types::Config{storage_dir_path:  self.storage_dir_path.cst_decode(),network:  self.network.cst_decode(),listening_addresses:  self.listening_addresses.cst_decode(),announcement_addresses:  self.announcement_addresses.cst_decode(),node_alias:  self.node_alias.cst_decode(),trusted_peers_0conf:  self.trusted_peers_0conf.cst_decode(),probing_liquidity_limit_multiplier:  self.probing_liquidity_limit_multiplier.cst_decode(),anchor_channels_config:  self.anchor_channels_config.cst_decode(),route_parameters:  self.route_parameters.cst_decode(),tolerate_offline_start:  self.tolerate_offline_start.cst_decode()}
             }
         }impl CstDecode<crate::api::types::ConfirmationStatus> for wire_cst_confirmation_status {
             // Codec=Cst (C-struct based), see doc to use other codecs
@@ -6510,7 +6513,8 @@ node_alias: core::ptr::null_mut(),
 trusted_peers_0conf: core::ptr::null_mut(),
 probing_liquidity_limit_multiplier: Default::default(),
 anchor_channels_config: core::ptr::null_mut(),
-route_parameters: core::ptr::null_mut(), }
+route_parameters: core::ptr::null_mut(),
+tolerate_offline_start: Default::default(), }
             }
         }
         impl Default for wire_cst_config {
@@ -8161,7 +8165,8 @@ node_alias: *mut wire_cst_node_alias,
 trusted_peers_0conf: *mut wire_cst_list_public_key,
 probing_liquidity_limit_multiplier: u64,
 anchor_channels_config: *mut wire_cst_anchor_channels_config,
-route_parameters: *mut wire_cst_route_parameters_config }
+route_parameters: *mut wire_cst_route_parameters_config,
+tolerate_offline_start: bool }
 #[repr(C)] #[derive(Clone, Copy)] pub struct wire_cst_confirmation_status { tag: i32, kind: ConfirmationStatusKind, }
 #[repr(C)] #[derive(Clone, Copy)] pub union ConfirmationStatusKind { Confirmed: wire_cst_ConfirmationStatus_Confirmed,
 nil__: (), }

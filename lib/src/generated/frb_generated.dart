@@ -3900,8 +3900,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   Config dco_decode_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 9)
-      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
+    if (arr.length != 10)
+      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
     return Config(
       storageDirPath: dco_decode_String(arr[0]),
       network: dco_decode_network(arr[1]),
@@ -3914,6 +3914,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
           dco_decode_opt_box_autoadd_anchor_channels_config(arr[7]),
       routeParameters:
           dco_decode_opt_box_autoadd_route_parameters_config(arr[8]),
+      tolerateOfflineStart: dco_decode_bool(arr[9]),
     );
   }
 
@@ -6234,6 +6235,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         sse_decode_opt_box_autoadd_anchor_channels_config(deserializer);
     var var_routeParameters =
         sse_decode_opt_box_autoadd_route_parameters_config(deserializer);
+    var var_tolerateOfflineStart = sse_decode_bool(deserializer);
     return Config(
         storageDirPath: var_storageDirPath,
         network: var_network,
@@ -6243,7 +6245,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         trustedPeers0Conf: var_trustedPeers0Conf,
         probingLiquidityLimitMultiplier: var_probingLiquidityLimitMultiplier,
         anchorChannelsConfig: var_anchorChannelsConfig,
-        routeParameters: var_routeParameters);
+        routeParameters: var_routeParameters,
+        tolerateOfflineStart: var_tolerateOfflineStart);
   }
 
   @protected
@@ -8985,6 +8988,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         self.anchorChannelsConfig, serializer);
     sse_encode_opt_box_autoadd_route_parameters_config(
         self.routeParameters, serializer);
+    sse_encode_bool(self.tolerateOfflineStart, serializer);
   }
 
   @protected

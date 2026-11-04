@@ -782,6 +782,13 @@ class Config {
   /// parameters on a per-payment basis in the corresponding method calls.
   RouteParametersConfig? routeParameters;
 
+  /// Whether to tolerate an unreachable chain data source when starting the node.
+  ///
+  /// When true, node start-up logs a warning and continues without chain
+  /// sync if the chain data source can't be reached (e.g. no network
+  /// connectivity), instead of failing. Defaults to false.
+  bool tolerateOfflineStart;
+
   Config({
     required this.storageDirPath,
     required this.network,
@@ -792,6 +799,7 @@ class Config {
     required this.probingLiquidityLimitMultiplier,
     this.anchorChannelsConfig,
     this.routeParameters,
+    required this.tolerateOfflineStart,
   });
 
   static Future<Config> default_() =>
@@ -807,7 +815,8 @@ class Config {
       trustedPeers0Conf.hashCode ^
       probingLiquidityLimitMultiplier.hashCode ^
       anchorChannelsConfig.hashCode ^
-      routeParameters.hashCode;
+      routeParameters.hashCode ^
+      tolerateOfflineStart.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -823,7 +832,8 @@ class Config {
           probingLiquidityLimitMultiplier ==
               other.probingLiquidityLimitMultiplier &&
           anchorChannelsConfig == other.anchorChannelsConfig &&
-          routeParameters == other.routeParameters;
+          routeParameters == other.routeParameters &&
+          tolerateOfflineStart == other.tolerateOfflineStart;
 }
 
 @freezed

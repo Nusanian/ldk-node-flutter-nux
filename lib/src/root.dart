@@ -533,6 +533,7 @@ class Builder {
       // logLevel: types.LogLevel.debug,
       trustedPeers0Conf: [],
       probingLiquidityLimitMultiplier: BigInt.from(3),
+      tolerateOfflineStart: false,
     ));
   }
 

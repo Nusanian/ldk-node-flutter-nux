@@ -3162,6 +3162,8 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
     wireObj.route_parameters =
         cst_encode_opt_box_autoadd_route_parameters_config(
             apiObj.routeParameters);
+    wireObj.tolerate_offline_start =
+        cst_encode_bool(apiObj.tolerateOfflineStart);
   }
 
   @protected
@@ -8864,6 +8866,9 @@ final class wire_cst_config extends ffi.Struct {
   external ffi.Pointer<wire_cst_anchor_channels_config> anchor_channels_config;
 
   external ffi.Pointer<wire_cst_route_parameters_config> route_parameters;
+
+  @ffi.Bool()
+  external bool tolerate_offline_start;
 }
 
 final class wire_cst_background_sync_config extends ffi.Struct {
