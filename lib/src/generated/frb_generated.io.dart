@@ -3164,6 +3164,7 @@ abstract class coreApiImplPlatform extends BaseApiImpl<coreWire> {
             apiObj.routeParameters);
     wireObj.tolerate_offline_start =
         cst_encode_bool(apiObj.tolerateOfflineStart);
+    wireObj.max_funding_satoshis = cst_encode_u_64(apiObj.maxFundingSatoshis);
   }
 
   @protected
@@ -8869,6 +8870,9 @@ final class wire_cst_config extends ffi.Struct {
 
   @ffi.Bool()
   external bool tolerate_offline_start;
+
+  @ffi.Uint64()
+  external int max_funding_satoshis;
 }
 
 final class wire_cst_background_sync_config extends ffi.Struct {

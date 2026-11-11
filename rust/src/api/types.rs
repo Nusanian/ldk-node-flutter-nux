@@ -1722,6 +1722,7 @@ impl TryFrom<Config> for ldk_node::config::Config {
             node_alias: value.node_alias.map(|e| e.into()),
             route_parameters: value.route_parameters.map(|e| e.into()),
             tolerate_offline_start: value.tolerate_offline_start,
+            max_funding_satoshis: value.max_funding_satoshis,
             announcement_addresses: if let Some(vec_socket_addr) = value.announcement_addresses {
                 let addr_vec: Result<
                     Vec<ldk_node::lightning::ln::msgs::SocketAddress>,
@@ -1759,6 +1760,7 @@ impl From<ldk_node::config::Config> for Config {
             anchor_channels_config: value.anchor_channels_config.map(|e| e.into()),
             route_parameters: value.route_parameters.map(|e| e.into()),
             tolerate_offline_start: value.tolerate_offline_start,
+            max_funding_satoshis: value.max_funding_satoshis,
             node_alias: value.node_alias.map(|e| e.into()),
             announcement_addresses: value.announcement_addresses.map(|vec_socket_addr| {
                 vec_socket_addr
@@ -1843,6 +1845,15 @@ pub struct Config {
     /// sync if the chain data source can't be reached (e.g. no network
     /// connectivity), instead of failing. Defaults to false.
     pub tolerate_offline_start: bool,
+    #[frb(non_final)]
+    /// The maximum funding amount, in satoshis, that will be accepted for
+    /// an inbound channel.
+    ///
+    /// This mirrors LDK's `ChannelHandshakeLimits::max_funding_satoshis`.
+    /// Accepting larger channels requires the counterparty to negotiate
+    /// the `wumbo` feature. Defaults to 16_777_215 (2^24 - 1), LDK's
+    /// pre-wumbo limit.
+    pub max_funding_satoshis: u64,
 }
 
 impl Default for AnchorChannelsConfig {
@@ -1869,6 +1880,7 @@ impl Default for Config {
             node_alias: None,
             route_parameters: None,
             tolerate_offline_start: false,
+            max_funding_satoshis: 16_777_215,
         }
     }
 }

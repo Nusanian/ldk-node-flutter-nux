@@ -3900,8 +3900,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
   Config dco_decode_config(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 10)
-      throw Exception('unexpected arr length: expect 10 but see ${arr.length}');
+    if (arr.length != 11)
+      throw Exception('unexpected arr length: expect 11 but see ${arr.length}');
     return Config(
       storageDirPath: dco_decode_String(arr[0]),
       network: dco_decode_network(arr[1]),
@@ -3915,6 +3915,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
       routeParameters:
           dco_decode_opt_box_autoadd_route_parameters_config(arr[8]),
       tolerateOfflineStart: dco_decode_bool(arr[9]),
+      maxFundingSatoshis: dco_decode_u_64(arr[10]),
     );
   }
 
@@ -6236,6 +6237,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     var var_routeParameters =
         sse_decode_opt_box_autoadd_route_parameters_config(deserializer);
     var var_tolerateOfflineStart = sse_decode_bool(deserializer);
+    var var_maxFundingSatoshis = sse_decode_u_64(deserializer);
     return Config(
         storageDirPath: var_storageDirPath,
         network: var_network,
@@ -6246,7 +6248,8 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
         probingLiquidityLimitMultiplier: var_probingLiquidityLimitMultiplier,
         anchorChannelsConfig: var_anchorChannelsConfig,
         routeParameters: var_routeParameters,
-        tolerateOfflineStart: var_tolerateOfflineStart);
+        tolerateOfflineStart: var_tolerateOfflineStart,
+        maxFundingSatoshis: var_maxFundingSatoshis);
   }
 
   @protected
@@ -8989,6 +8992,7 @@ class coreApiImpl extends coreApiImplPlatform implements coreApi {
     sse_encode_opt_box_autoadd_route_parameters_config(
         self.routeParameters, serializer);
     sse_encode_bool(self.tolerateOfflineStart, serializer);
+    sse_encode_u_64(self.maxFundingSatoshis, serializer);
   }
 
   @protected
