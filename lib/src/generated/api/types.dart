@@ -789,6 +789,15 @@ class Config {
   /// connectivity), instead of failing. Defaults to false.
   bool tolerateOfflineStart;
 
+  /// The maximum funding amount, in satoshis, that will be accepted for
+  /// an inbound channel.
+  ///
+  /// This mirrors LDK's `ChannelHandshakeLimits::max_funding_satoshis`.
+  /// Accepting larger channels requires the counterparty to negotiate
+  /// the `wumbo` feature. Defaults to 16_777_215 (2^24 - 1), LDK's
+  /// pre-wumbo limit.
+  BigInt maxFundingSatoshis;
+
   Config({
     required this.storageDirPath,
     required this.network,
@@ -800,6 +809,7 @@ class Config {
     this.anchorChannelsConfig,
     this.routeParameters,
     required this.tolerateOfflineStart,
+    required this.maxFundingSatoshis,
   });
 
   static Future<Config> default_() =>
@@ -816,7 +826,8 @@ class Config {
       probingLiquidityLimitMultiplier.hashCode ^
       anchorChannelsConfig.hashCode ^
       routeParameters.hashCode ^
-      tolerateOfflineStart.hashCode;
+      tolerateOfflineStart.hashCode ^
+      maxFundingSatoshis.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -833,7 +844,8 @@ class Config {
               other.probingLiquidityLimitMultiplier &&
           anchorChannelsConfig == other.anchorChannelsConfig &&
           routeParameters == other.routeParameters &&
-          tolerateOfflineStart == other.tolerateOfflineStart;
+          tolerateOfflineStart == other.tolerateOfflineStart &&
+          maxFundingSatoshis == other.maxFundingSatoshis;
 }
 
 @freezed

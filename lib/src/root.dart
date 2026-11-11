@@ -534,6 +534,7 @@ class Builder {
       trustedPeers0Conf: [],
       probingLiquidityLimitMultiplier: BigInt.from(3),
       tolerateOfflineStart: false,
+      maxFundingSatoshis: BigInt.from(16777215),
     ));
   }
 

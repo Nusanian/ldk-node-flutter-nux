@@ -122,6 +122,7 @@ typedef struct wire_cst_config {
   struct wire_cst_anchor_channels_config *anchor_channels_config;
   struct wire_cst_route_parameters_config *route_parameters;
   bool tolerate_offline_start;
+  uint64_t max_funding_satoshis;
 } wire_cst_config;
 
 typedef struct wire_cst_background_sync_config {
